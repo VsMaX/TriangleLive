@@ -20,7 +20,7 @@ namespace TriangleEngine
         Right
     }
 
-    public class Coordinates
+    public class Position
     {
         int X { get; set; }
         int Y { get; set; }

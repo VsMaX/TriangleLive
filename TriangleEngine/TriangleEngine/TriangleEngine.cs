@@ -45,10 +45,6 @@ namespace Application
 
         private void MoveAll()
         {
-            for (int i = 0; i < BoardSize; i++)
-            {
-                for(int j = 0; j < BoardSize; j++)
-                {
                     Monster monster = Board[i, j];
                     if(monster != null)
                     {
@@ -72,8 +68,6 @@ namespace Application
 
                         }
                     }
-                }
-            }
         }
 
         private Monster LeftMonster(int x, int y)

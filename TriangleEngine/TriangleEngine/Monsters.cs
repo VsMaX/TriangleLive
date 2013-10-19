@@ -9,7 +9,8 @@ namespace TriangleEngine
 {
     public abstract class Monster
     {
-        public int Size;
+        public int Size { get; set; }
+        public Position Pos { get; set; }
 
         public Monster()
         {
@@ -23,6 +24,8 @@ namespace TriangleEngine
             return (Direction)moveTo;
         }
 
+        
+
         public int Grow()
         {
             return ++this.Size;
@@ -35,7 +38,7 @@ namespace TriangleEngine
     {
         public override bool Eats(Monster monster)
         {
-            if(monster is Wolf)
+            if(monster is Bear)
                 return true;
             return false;
         }
@@ -45,7 +48,9 @@ namespace TriangleEngine
     {
         public override bool Eats(Monster monster)
         {
-            throw new NotImplementedException();
+            if (monster is Rabbit)
+                return true;
+            return false;
         }
     }
 
@@ -53,7 +58,9 @@ namespace TriangleEngine
     {
         public override bool Eats(Monster monster)
         {
-            throw new NotImplementedException();
+            if (monster is Wolf)
+                return true;
+            return false;
         }
     }
 
@@ -61,7 +68,9 @@ namespace TriangleEngine
     {
         public override bool Eats(Monster monster)
         {
-            throw new NotImplementedException();
+            if (monster is Carrot)
+                return true;
+            return false;
         }
     }
 }
