@@ -24,8 +24,6 @@ namespace TriangleEngine
             return (Direction)moveTo;
         }
 
-        
-
         public int Grow()
         {
             return ++this.Size;
