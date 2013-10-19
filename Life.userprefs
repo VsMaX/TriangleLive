@@ -1,0 +1,17 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Rabbit.cs">
+    <Files>
+      <File FileName="Assets/GameMain.cs" Line="18" Column="15" />
+      <File FileName="Assets/Tags.cs" Line="12" Column="2" />
+      <File FileName="Assets/TriangleEngine.cs" Line="39" Column="3" />
+      <File FileName="Assets/Carrot.cs" Line="20" Column="27" />
+      <File FileName="Assets/Wolf.cs" Line="20" Column="3" />
+      <File FileName="Assets/Rabbit.cs" Line="7" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -5,7 +5,10 @@ public class GameMain : MonoBehaviour {
 	
 	private GameObject sellection ;
 	
-	
+	public Transform carrot;
+	public Transform wolf;
+	public Transform bear;
+	public Transform rabbit;
 	
 	
 	private bool isOkToTouch;
@@ -32,8 +35,8 @@ public class GameMain : MonoBehaviour {
 				
 				break;
 				
-			case TouchPhase.Canceled:
-				
+			case TouchPhase.Ended:
+				sellection = null;
 				
 				break;
 			}
