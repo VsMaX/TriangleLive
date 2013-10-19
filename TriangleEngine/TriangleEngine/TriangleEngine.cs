@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TriangleEngine;
 
 namespace Application
@@ -6,11 +7,11 @@ namespace Application
 
     public class TriangleEngine
     {
-        public Monster[,] Board;
+        public List<Monster> Actors;
         public const int BoardSize = 10;
         public TriangleEngine()
         {
-            Board = new Monster[BoardSize, BoardSize];
+            Actors = new List<Monster>();
 
         }
 
@@ -45,34 +46,36 @@ namespace Application
 
         private void MoveAll()
         {
-                    Monster monster = Board[i, j];
-                    if(monster != null)
-                    {
-                        Direction d = monster.Move();
-                        switch(d)
-                        {
-                            case Direction.Up:
-                                Monster monsterAbove = Board[i, j + 1];
-                                if (monster.Eats(monsterAbove))
-                                {
-                                    //remove monster above
-                                }
-                                    
-                                break;
-                            case Direction.Right:
-                                break;
-                            case Direction.Down:
-                                break;
-                            case Direction.Left:
-                                break;
+            
+            //foreach( Monster monster in Actors)
+            //{
+            //            Direction d = monster.Move();
+            //            Position pos= monster.Pos;            
+            //            switch(d)
+            //            {
 
-                        }
-                    }
+            //                case Direction.Up:
+                                
+            //                    if (monster.Eats(monsterAbove))
+            //                    {
+            //                        //remove monster above
+            //                    }
+                                    
+            //                    break;
+            //                case Direction.Right:
+            //                    break;
+            //                case Direction.Down:
+            //                    break;
+            //                case Direction.Left:
+            //                    break;
+
+            //            }
+            //        }
         }
 
         private Monster LeftMonster(int x, int y)
         {
-            
+            throw new NotImplementedException();
         }
 
         public void PutMonsterOnBoard(Monster monster, int x, int y)
@@ -80,7 +83,7 @@ namespace Application
             if (x < 0 || x > 9 || y < 0 || y > 10)
                 throw new Exception("Board indexes out of range");
 
-            Board[x, y] = monster;
+          //  Board[x, y] = monster;
 
         }
 
