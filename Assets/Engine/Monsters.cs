@@ -1,15 +1,16 @@
-﻿/*
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TriangleEngine;
 
 namespace TriangleEngine
 {
     public abstract class Monster
     {
-        public int Size;
+        public int Size { get; set; }
+        public Position Pos { get; set; }
 
         public Monster()
         {
@@ -29,13 +30,22 @@ namespace TriangleEngine
         }
 
         public abstract bool Eats(Monster monster);
+
+        public bool IsNear(Monster monster)
+        {
+            if (Math.Abs(this.Pos.X - monster.Pos.X) == 1)
+                return true;
+            if (Math.Abs(this.Pos.X - monster.Pos.X) == 1)
+                return true;
+            return false;
+        }
     }
 
     public class Carrot : Monster
     {
         public override bool Eats(Monster monster)
         {
-            if(monster is Wolf)
+            if(monster is Bear)
                 return true;
             return false;
         }
@@ -45,7 +55,9 @@ namespace TriangleEngine
     {
         public override bool Eats(Monster monster)
         {
-            throw new NotImplementedException();
+            if (monster is Rabbit)
+                return true;
+            return false;
         }
     }
 
@@ -53,7 +65,9 @@ namespace TriangleEngine
     {
         public override bool Eats(Monster monster)
         {
-            throw new NotImplementedException();
+            if (monster is Wolf)
+                return true;
+            return false;
         }
     }
 
@@ -61,8 +75,9 @@ namespace TriangleEngine
     {
         public override bool Eats(Monster monster)
         {
-            throw new NotImplementedException();
+            if (monster is Carrot)
+                return true;
+            return false;
         }
     }
 }
- */
