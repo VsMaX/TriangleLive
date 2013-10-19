@@ -64,6 +64,16 @@ namespace TriangleLive
 
     public class Carrot : Monster
     {
+        private static int LifeMax = 10;
+        private static int EnergyMax =0;
+        private static int MoveSpeed =0;
+        private static int GetOlder =0;
+        private static int Perception =0;
+        private static float ImigrationProbability =0.05f;
+        private static float BornProbabillity = 0.3f;
+        private static int MaxPopulation= 10;
+
+
         public Carrot(int x, int y):base(new Position(x,y))
        {
         } 
@@ -77,6 +87,15 @@ namespace TriangleLive
 
     public class Wolf : Monster
     {
+        private static int LifeMax = 50;
+        private static int EnergyMax = 10;
+        private static int MoveSpeed = 2;
+        private static int GetOlder = 1;
+        private static int Perception = 15;
+        private static float ImigrationProbability = 0.05f;
+        private static float BornProbabillity = 0.2f;
+        private static int MaxPopulation = 30;
+
           public Wolf(int x, int y): base(new Position(x,y))
         {
           
@@ -91,6 +110,15 @@ namespace TriangleLive
 
     public class Bear : Monster
     {
+        private static int LifeMax = 100;
+        private static int EnergyMax = 30;
+        private static int MoveSpeed = 1;
+        private static int GetOlder = 1;
+        private static int Perception =20;
+        private static float ImigrationProbability = 0.01f;
+        private static float BornProbabillity = 0.1f;
+        private static int MaxPopulation = 20;
+
           public Bear(int x, int y):
            base(new Position(x,y)){} 
         public override bool Eats(Monster monster)
@@ -103,6 +131,15 @@ namespace TriangleLive
 
     public class Rabbit : Monster
     {
+        private static int LifeMax = 20;
+        private static int EnergyMax = 10;
+        private static int MoveSpeed =  0;
+        private static int GetOlder = 0;
+        private static int Perception = 0;
+        private static float ImigrationProbability = 0.05f;
+        private static float BornProbabillity = 0.3f;
+        private static int MaxPopulation = 10;
+
           public Rabbit(int x, int y):
            base(new Position(x,y)){
         } 
