@@ -38,6 +38,8 @@ namespace TriangleLive
             {
                 if (toRemove.Contains(currentMonster))
                     continue;
+                if (currentMonster.status == TurnAction.Grow)
+                    return;
                 Direction direction = currentMonster.Move();
                 Position newPosition = new Position(direction, currentMonster.Pos);
                 if (CanMove(newPosition))
