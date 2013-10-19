@@ -29,6 +29,11 @@ namespace TriangleLive
             Size = 0;
         }
 
+        public Monster(Position pos)
+        {
+            this.Pos = Pos;
+        }
+
         public Direction Move()
         {
             Random r = new Random();
@@ -55,6 +60,9 @@ namespace TriangleLive
 
     public class Carrot : Monster
     {
+        public Carrot(int x, int y):base(new Position(x,y))
+       {
+        } 
         public override bool Eats(Monster monster)
         {
             if(monster is Bear)
@@ -65,6 +73,10 @@ namespace TriangleLive
 
     public class Wolf : Monster
     {
+          public Wolf(int x, int y): base(new Position(x,y))
+        {
+          
+        } 
         public override bool Eats(Monster monster)
         {
             if (monster is Rabbit)
@@ -75,6 +87,8 @@ namespace TriangleLive
 
     public class Bear : Monster
     {
+          public Bear(int x, int y):
+           base(new Position(x,y)){} 
         public override bool Eats(Monster monster)
         {
             if (monster is Wolf)
@@ -85,6 +99,9 @@ namespace TriangleLive
 
     public class Rabbit : Monster
     {
+          public Rabbit(int x, int y):
+           base(new Position(x,y)){
+        } 
         public override bool Eats(Monster monster)
         {
             if (monster is Carrot)
