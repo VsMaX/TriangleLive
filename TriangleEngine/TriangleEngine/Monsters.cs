@@ -8,8 +8,22 @@ namespace TriangleLive
     public abstract class Monster
     {
         public int Size { get; set; }
-        public Position Pos { get; set; }
+        protected static int LifeMax;
+        protected static int EnergyMax;
+        protected static int MoveSpeed;
+        protected static int GetOlder;
+        protected static int Perception;
+        protected static float ImigrationProbability;
+        protected static float BornProbabillity;
+        protected static int MaxPopulation;
 
+        protected int Life;
+        protected int Energy;
+
+        public TurnAction status;
+        
+        public Position Pos { get; set; }
+         
         public Monster()
         {
             Size = 0;
@@ -78,4 +92,6 @@ namespace TriangleLive
             return false;
         }
     }
+
+
 }
