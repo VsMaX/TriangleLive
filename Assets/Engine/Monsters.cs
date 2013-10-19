@@ -2,19 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using TriangleEngine;
 
-namespace TriangleEngine
+namespace TriangleLive
 {
     public abstract class Monster
     {
         public int Size { get; set; }
-        public Position Pos { get; set; }
+        protected static int LifeMax;
+        protected static int EnergyMax;
+        protected static int MoveSpeed;
+        protected static int GetOlder;
+        protected static int Perception;
+        protected static float ImigrationProbability;
+        protected static float BornProbabillity;
+        protected static int MaxPopulation;
 
+        protected int Life;
+        protected int Energy;
+
+        public TurnAction status;
+        
+        public Position Pos { get; set; }
+         
         public Monster()
         {
             Size = 0;
+        }
+
+        public Monster(Position pos)
+        {
+            this.Pos = pos;
         }
 
         public Direction Move()
@@ -24,6 +41,10 @@ namespace TriangleEngine
             return (Direction)moveTo;
         }
 
+        public Direction Move(int val)
+        {
+            return (Direction)val;
+        }
         public int Grow()
         {
             return ++this.Size;
@@ -43,6 +64,9 @@ namespace TriangleEngine
 
     public class Carrot : Monster
     {
+        public Carrot(int x, int y):base(new Position(x,y))
+       {
+        } 
         public override bool Eats(Monster monster)
         {
             if(monster is Bear)
@@ -53,6 +77,10 @@ namespace TriangleEngine
 
     public class Wolf : Monster
     {
+          public Wolf(int x, int y): base(new Position(x,y))
+        {
+          
+        } 
         public override bool Eats(Monster monster)
         {
             if (monster is Rabbit)
@@ -63,6 +91,8 @@ namespace TriangleEngine
 
     public class Bear : Monster
     {
+          public Bear(int x, int y):
+           base(new Position(x,y)){} 
         public override bool Eats(Monster monster)
         {
             if (monster is Wolf)
@@ -73,6 +103,9 @@ namespace TriangleEngine
 
     public class Rabbit : Monster
     {
+          public Rabbit(int x, int y):
+           base(new Position(x,y)){
+        } 
         public override bool Eats(Monster monster)
         {
             if (monster is Carrot)
@@ -80,4 +113,6 @@ namespace TriangleEngine
             return false;
         }
     }
+
+
 }

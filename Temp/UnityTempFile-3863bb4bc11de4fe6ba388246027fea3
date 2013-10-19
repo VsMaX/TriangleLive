@@ -33,7 +33,6 @@
 'Assets/Engine/Monsters.cs'
 'Assets/Engine/TriangleEngine.cs'
 'Assets/Engine/Utils.cs'
-'Assets/Scripts/Animal.cs'
 'Assets/Scripts/GameMain.cs'
 'Assets/Scripts/Tags.cs'
 'Assets/TK2DROOT/tk2d/Code/Camera/tk2dCamera.cs'
