@@ -31,7 +31,7 @@ namespace TriangleLive
 
         public Monster(Position pos)
         {
-            this.Pos = Pos;
+            this.Pos = pos;
         }
 
         public Direction Move()

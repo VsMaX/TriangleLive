@@ -19,7 +19,6 @@ namespace TriangleLive
         public void Turn()
         {
             MoveAndActOnAll();
-            GrowCarrot();
         }
 
         private void GrowCarrot()
@@ -59,6 +58,10 @@ namespace TriangleLive
                         }
                     }
                 }
+            }
+            foreach(Monster monsterToRemove in toRemove)
+            {
+                Monsters.Remove(monsterToRemove);
             }
         }
 
