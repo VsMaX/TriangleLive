@@ -1,4 +1,5 @@
 ﻿using System;
+using TriangleEngine;
 
 namespace Application
 {
@@ -11,14 +12,15 @@ namespace Application
         {
             Board = new Monster[BoardSize, BoardSize];
 
-            while (true)
-            {
-                MoveAll();
-                CheckConflicts();
-                GrowCarrot();
-                MatchPairs();
-                ActOnAll();
-            }
+        }
+
+        public void Turn()
+        {
+            MoveAll();
+            CheckConflicts();
+            GrowCarrot();
+            MatchPairs();
+            ActOnAll();
         }
 
         private void ActOnAll()
@@ -43,20 +45,38 @@ namespace Application
 
         private void MoveAll()
         {
-            for (int i = 0; i < BoardSizel; i++)
+            for (int i = 0; i < BoardSize; i++)
             {
                 for(int j = 0; j < BoardSize; j++)
                 {
-                    if(Board[i,j] != null)
+                    Monster monster = Board[i, j];
+                    if(monster != null)
                     {
-                        Monster monster = Board[i, j];
-                        direction d = monster.Move();
+                        Direction d = monster.Move();
+                        switch(d)
+                        {
+                            case Direction.Up:
+                                Monster monsterAbove = Board[i, j + 1];
+                                if(monster.Eats(monsterAbove))
+                                    
+                                break;
+                            case Direction.Right:
+                                break;
+                            case Direction.Down:
+                                break;
+                            case Direction.Left:
+                                break;
 
+                        }
                     }
                 }
             }
         }
 
+        private Monster LeftMonster(int x, int y)
+        {
+            
+        }
 
         public void PutMonsterOnBoard(Monster monster, int x, int y)
         {
@@ -76,42 +96,6 @@ namespace Application
         {
 
         }
-    }
-
-    public abstract class Monster
-    {
-        public int Size;
-
-        public Monster()
-        {
-            Size = 0;
-        }
-
-        public direction Move()
-        {
-            Random r = new Random();
-            int moveTo = r.Next(0, 3);
-            return (direction)moveTo;
-        }
-
-        public int Grow()
-        {
-            return 
-        }
-    }
-
-    public enum TurnAction
-    {
-        Move,
-        Grow
-    }
-
-    public enum direction
-    {
-        Top,
-        Left,
-        Bottom,
-        Right
-    }
+    }    
 }
 
