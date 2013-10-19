@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TriangleEngine
+namespace TriangleLive
 {
     public delegate void MonsterEatenEventHandler(object sender, Monster monster);
     public delegate void MonsterBornEventHandler(object sender, Monster monster);
@@ -29,37 +29,37 @@ namespace TriangleEngine
 
         private void CheckActions(Monster currentMonster)
         {
-            for(int i = 0; i < Monsters.Count; i++)
-            {
-                Monster monster = Monsters[i];
-                if(currentMonster.IsNear(monster))
-                {
-                    if(currentMonster.Eats(monster))
-                        EatMonster(monster);
-                    if (currentMonster.GetType() == monster.GetType())
-                        Breed(currentMonster, monster);
-                }
-            }
-        }
-        
-        private void MoveAll()
-        {
-            for (int i = 0; i < Monsters.Count; i++)
-            {
-                Monster monster = Monsters[i];
-                Direction direction = monster.Move();
-                Position newPosition = new Position(direction, monster.Pos);
-                if (CanMove(newPosition))
-                {
-                    monster.Pos = newPosition;
-                    CheckActions(monster);
-                }
-            }
+            
         }
 
-        private void EatMonster(Monster monster)
+        private void MoveAndActOnAll()
         {
-            Monsters.Remove(monster);
+            List<Monster> toRemove = new List<Monster>();
+            foreach(Monster currentMonster in Monsters)
+            {
+                if (toRemove.Contains(currentMonster))
+                    continue;
+                Direction direction = currentMonster.Move();
+                Position newPosition = new Position(direction, currentMonster.Pos);
+                if (CanMove(newPosition))
+                {
+                    currentMonster.Pos = newPosition;
+                    foreach (Monster monster in Monsters)
+                    {
+                        if (monster == currentMonster)
+                            continue;
+                        if (currentMonster.IsNear(monster))
+                        {
+                            if (currentMonster.Eats(monster))
+                            {
+                                toRemove.Add(monster);
+                            }
+                            if (currentMonster.GetType() == monster.GetType())
+                                Breed(currentMonster, monster);
+                        }
+                    }
+                }
+            }
         }
 
         private void Breed(Monster currentMonster, Monster monster)
@@ -69,7 +69,7 @@ namespace TriangleEngine
 
         private bool CanMove(Position position)
         {
-            foreach(var m in Monsters)
+            foreach (var m in Monsters)
             {
                 if (m.Pos == position)
                     return false;
@@ -84,7 +84,7 @@ namespace TriangleEngine
 
         public bool PutMonsterOnBoard(Monster monster)
         {
-            foreach(Monster m in Monsters)
+            foreach (Monster m in Monsters)
             {
                 if (monster.Pos == m.Pos)
                     return false;
@@ -102,6 +102,5 @@ namespace TriangleEngine
         {
 
         }
-    }    
+    }
 }
-

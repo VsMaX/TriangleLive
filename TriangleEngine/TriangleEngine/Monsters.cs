@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TriangleEngine
+namespace TriangleLive
 {
     public abstract class Monster
     {
