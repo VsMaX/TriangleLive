@@ -16,7 +16,11 @@ namespace TriangleEngine
         protected static float ImigrationProbability;
         protected static float BornProbabillity;
         protected static int MaxPopulation;
-        
+
+        protected int Life;
+        protected int Energy;
+
+        public TurnAction status;
         
         public Position Pos { get; set; }
          
