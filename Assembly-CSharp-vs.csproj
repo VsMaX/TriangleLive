@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{BA9C268E-FFE6-A708-0C59-90CC92A4E90B}</ProjectGuid>
+	<ProjectGuid>{3EA905A0-AC2C-6289-685B-5B83F634A7B3}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -44,9 +44,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Carrot.cs" />
-     <Compile Include="Assets\GameMain.cs" />
-     <Compile Include="Assets\Rabbit.cs" />
+     <Compile Include="Assets\Engine\Monsters.cs" />
+     <Compile Include="Assets\Engine\TriangleEngine.cs" />
+     <Compile Include="Assets\Engine\Utils.cs" />
+     <Compile Include="Assets\Scripts\GameMain.cs" />
+     <Compile Include="Assets\Scripts\Tags.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d\Code\Camera\tk2dCamera.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d\Code\Camera\tk2dCameraAnchor.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d\Code\Camera\tk2dCameraUtil.cs" />
@@ -123,9 +125,6 @@
      <Compile Include="Assets\TK2DROOT\tk2d_demo\tk2dDemoCameraController.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d_demo\tk2dDemoReloadController.cs" />
      <Compile Include="Assets\TK2DROOT\tk2d_demo\tk2dDemoRuntimeSpriteController.cs" />
-     <Compile Include="Assets\Tags.cs" />
-     <Compile Include="Assets\TriangleEngine.cs" />
-     <Compile Include="Assets\Wolf.cs" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\LitSolidVertexColor.shader" />
      <None Include="Assets\TK2DROOT\tk2d\Goodies\TexturePacker\Exporter\2dtoolkit\exporter.xml" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\SolidVertexColor.shader" />
