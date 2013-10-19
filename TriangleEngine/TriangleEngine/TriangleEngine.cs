@@ -8,13 +8,13 @@ namespace Application
     public delegate void MonsterBornEventHandler(object sender, Monster monster);
     public class TriangleEngine
     {
-        public List<Monster> Actors;
+        public List<Monster> Monsters;
         public const int BoardSize = 10;
         public event MonsterEatenEventHandler MonsterEaten;
         public event MonsterBornEventHandler MonsterBorn;
         public TriangleEngine()
         {
-            Actors = new List<Monster>();
+            Monsters = new List<Monster>();
         }
 
         public void Turn()
@@ -30,9 +30,9 @@ namespace Application
 
         private void CheckActions(Monster currentMonster)
         {
-            for(int i = 0; i < Actors.Count; i++)
+            for(int i = 0; i < Monsters.Count; i++)
             {
-                Monster monster = Actors[i];
+                Monster monster = Monsters[i];
                 if(currentMonster.IsNear(monster))
                 {
                     if(currentMonster.Eats(monster))
@@ -45,9 +45,9 @@ namespace Application
         
         private void MoveAll()
         {
-            for (int i = 0; i < Actors.Count; i++)
+            for (int i = 0; i < Monsters.Count; i++)
             {
-                Monster monster = Actors[i];
+                Monster monster = Monsters[i];
                 Direction direction = monster.Move();
                 Position newPosition = new Position(direction, monster.Pos);
                 if (CanMove(newPosition))
@@ -60,17 +60,17 @@ namespace Application
 
         private void EatMonster(Monster monster)
         {
-            Actors.Remove(monster);
+            Monsters.Remove(monster);
         }
 
         private void Breed(Monster currentMonster, Monster monster)
         {
             throw new NotImplementedException();
-        }        
+        }
 
         private bool CanMove(Position position)
         {
-            foreach(var m in Actors)
+            foreach(var m in Monsters)
             {
                 if (m.Pos == position)
                     return false;
@@ -85,12 +85,12 @@ namespace Application
 
         public bool PutMonsterOnBoard(Monster monster)
         {
-            foreach(Monster m in Actors)
+            foreach(Monster m in Monsters)
             {
                 if (monster.Pos == m.Pos)
                     return false;
             }
-            Actors.Add(monster);
+            Monsters.Add(monster);
             return true;
         }
 
