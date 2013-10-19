@@ -41,6 +41,10 @@ namespace TriangleLive
             return (Direction)moveTo;
         }
 
+        public Direction Move(int val)
+        {
+            return (Direction)val;
+        }
         public int Grow()
         {
             return ++this.Size;
