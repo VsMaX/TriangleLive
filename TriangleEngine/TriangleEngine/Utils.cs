@@ -8,7 +8,7 @@ namespace TriangleEngine
     public enum TurnAction
     {
         Move,
-        Grow
+        Grow,
     }
 
     public enum Direction
