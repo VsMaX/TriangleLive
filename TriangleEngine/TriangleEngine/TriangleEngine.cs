@@ -4,34 +4,23 @@ using TriangleEngine;
 
 namespace Application
 {
-
+    public delegate void MonsterEatenEventHandler(object sender, Monster monster);
+    public delegate void MonsterBornEventHandler(object sender, Monster monster);
     public class TriangleEngine
     {
         public List<Monster> Actors;
         public const int BoardSize = 10;
+        public event MonsterEatenEventHandler MonsterEaten;
+        public event MonsterBornEventHandler MonsterBorn;
         public TriangleEngine()
         {
             Actors = new List<Monster>();
-
         }
 
         public void Turn()
         {
             MoveAll();
-            CheckConflicts();
             GrowCarrot();
-            MatchPairs();
-            ActOnAll();
-        }
-
-        private void ActOnAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void MatchPairs()
-        {
-            throw new NotImplementedException();
         }
 
         private void GrowCarrot()
@@ -39,38 +28,54 @@ namespace Application
             throw new NotImplementedException();
         }
 
-        private void CheckConflicts()
+        private void CheckActions(Monster currentMonster)
         {
-            throw new NotImplementedException();
+            for(int i = 0; i < Actors.Count; i++)
+            {
+                Monster monster = Actors[i];
+                if(currentMonster.IsNear(monster))
+                {
+                    if(currentMonster.Eats(monster))
+                        EatMonster(monster);
+                    if (currentMonster.GetType() == monster.GetType())
+                        Breed(currentMonster, monster);
+                }
+            }
         }
-
+        
         private void MoveAll()
         {
-            
-            //foreach( Monster monster in Actors)
-            //{
-            //            Direction d = monster.Move();
-            //            Position pos= monster.Pos;            
-            //            switch(d)
-            //            {
+            for (int i = 0; i < Actors.Count; i++)
+            {
+                Monster monster = Actors[i];
+                Direction direction = monster.Move();
+                Position newPosition = new Position(direction, monster.Pos);
+                if (CanMove(newPosition))
+                {
+                    monster.Pos = newPosition;
+                    CheckActions(monster);
+                }
+            }
+        }
 
-            //                case Direction.Up:
-                                
-            //                    if (monster.Eats(monsterAbove))
-            //                    {
-            //                        //remove monster above
-            //                    }
-                                    
-            //                    break;
-            //                case Direction.Right:
-            //                    break;
-            //                case Direction.Down:
-            //                    break;
-            //                case Direction.Left:
-            //                    break;
+        private void EatMonster(Monster monster)
+        {
+            Actors.Remove(monster);
+        }
 
-            //            }
-            //        }
+        private void Breed(Monster currentMonster, Monster monster)
+        {
+            throw new NotImplementedException();
+        }        
+
+        private bool CanMove(Position position)
+        {
+            foreach(var m in Actors)
+            {
+                if (m.Pos == position)
+                    return false;
+            }
+            return true;
         }
 
         private Monster LeftMonster(int x, int y)
@@ -78,13 +83,15 @@ namespace Application
             throw new NotImplementedException();
         }
 
-        public void PutMonsterOnBoard(Monster monster, int x, int y)
+        public bool PutMonsterOnBoard(Monster monster)
         {
-            if (x < 0 || x > 9 || y < 0 || y > 10)
-                throw new Exception("Board indexes out of range");
-
-          //  Board[x, y] = monster;
-
+            foreach(Monster m in Actors)
+            {
+                if (monster.Pos == m.Pos)
+                    return false;
+            }
+            Actors.Add(monster);
+            return true;
         }
 
         public void StartGame()

@@ -30,6 +30,15 @@ namespace TriangleEngine
         }
 
         public abstract bool Eats(Monster monster);
+
+        public bool IsNear(Monster monster)
+        {
+            if (Math.Abs(this.Pos.X - monster.Pos.X) == 1)
+                return true;
+            if (Math.Abs(this.Pos.X - monster.Pos.X) == 1)
+                return true;
+            return false;
+        }
     }
 
     public class Carrot : Monster
