@@ -57,7 +57,10 @@ namespace Application
                         {
                             case Direction.Up:
                                 Monster monsterAbove = Board[i, j + 1];
-                                if(monster.Eats(monsterAbove))
+                                if (monster.Eats(monsterAbove))
+                                {
+                                    //remove monster above
+                                }
                                     
                                 break;
                             case Direction.Right:
