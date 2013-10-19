@@ -18,7 +18,7 @@ namespace TriangleLive
 
         public void Turn()
         {
-            MoveAll();
+            MoveAndActOnAll();
             GrowCarrot();
         }
 
