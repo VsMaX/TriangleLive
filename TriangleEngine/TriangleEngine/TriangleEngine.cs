@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using TriangleEngine;
 
-namespace Application
+namespace TriangleEngine
 {
     public delegate void MonsterEatenEventHandler(object sender, Monster monster);
     public delegate void MonsterBornEventHandler(object sender, Monster monster);
