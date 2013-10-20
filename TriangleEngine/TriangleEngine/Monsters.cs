@@ -18,7 +18,7 @@ namespace TriangleLive
         protected const float SpriteRange = 1.0f;
         public int Life;
         protected int Energy;
-
+        public UnityEngine.GameObject costam;
         public TurnAction status;
         
         public Position Pos { get; set; }
