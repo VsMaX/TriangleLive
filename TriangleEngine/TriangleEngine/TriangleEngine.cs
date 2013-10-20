@@ -19,6 +19,12 @@ namespace TriangleLive
         public void Turn()
         {
             MoveAndActOnAll();
+            KillAll();
+        }
+
+        private void KillAll()
+        {
+            Monsters.RemoveAll(x => x.Life < 0);
         }
 
         private void GrowCarrot()
