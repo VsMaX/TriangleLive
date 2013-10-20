@@ -24,10 +24,7 @@ public class GameMain : MonoBehaviour {
 	public GameObject panel;
 	private TriangleEngine _engine;
 	
-	private Bear _bearMonster;
-	private Carrot _carrotMonster;
-	private Rabbit _rabbitMonster;
-	private Wolf _wolfMonster;
+
 	
 	
 	
@@ -46,6 +43,7 @@ public class GameMain : MonoBehaviour {
 	{
 		startPositions = GameObject.FindObjectsOfType(typeof(GameObject)).Cast<GameObject>().Where(go => go.name == "pos").Select(go => go.transform.position).ToList();
 		animalPos = GameObject.FindObjectsOfType(typeof(GameObject)).Cast<GameObject>().Where(go => go.name == "item").ToDictionary(go => go, go => go.transform.position);
+		
 		
 	}
 	
@@ -87,7 +85,7 @@ public class GameMain : MonoBehaviour {
 				{
 					Vector2 currentPos = new Vector2(sellection.transform.position.x, sellection.transform.position.y);
 					sellection.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-					CreateNewObject(sellection, _currentStartPosition, sellection.tag);
+					CreateNewObject(sellection, currentPos, sellection.tag);
 					sellection = null;
 				}
 				
@@ -108,60 +106,65 @@ public class GameMain : MonoBehaviour {
 		
 		//poprawic !!!!!
 		obj.collider.enabled = false;
-		int xPos = (int)Mathf.Ceil(pos.x);
+		int xPos = (int)Mathf.Floor(pos.x);
 		print (xPos);
-		int yPos = (int)Mathf.Ceil(pos.y);
+		int yPos = (int)Mathf.Floor(pos.y);
 		print (yPos);
 			
 		
 		
-			if ( obj.tag == "carrot" && objCountCarrot < 1)
+
+			if ( obj.tag == "carrot" && objCountCarrot < 2)
 			{	
 				GameObject _carrot = GameObject.Instantiate(obj, new Vector3(_currentStartPosition.x, _currentStartPosition.y, 0.0f),Quaternion.identity) as GameObject;
+				
 				_carrot.collider.enabled = true;
 				animalPos.Remove(obj);
 				animalPos.Add(_carrot,_currentStartPosition);
 				objCountCarrot ++;
-				_carrotMonster = new Carrot(xPos,yPos);
+				Carrot _carrotMonster = new Carrot(xPos,yPos);
 				animals.Add(_carrotMonster, _carrot);
 				_engine.PutMonsterOnBoard(_carrotMonster);
 				RemovePanel();
 			}
 			
-			if ( obj.tag == "wolf" && objCountWolf < 1)
+			if ( obj.tag == "wolf" && objCountWolf < 2)
 			{
 				GameObject _wolf = GameObject.Instantiate(obj, new Vector3(_currentStartPosition.x, _currentStartPosition.y, 0.0f),Quaternion.identity) as GameObject;
 				_wolf.collider.enabled = true;
 				animalPos.Remove(obj);
 				animalPos.Add(_wolf,_currentStartPosition);
 				objCountWolf++; 
-				_wolfMonster = new Wolf(xPos, yPos);
+				Wolf _wolfMonster = new Wolf(xPos, yPos);
 				animals.Add(_wolfMonster, _wolf);
 				_engine.PutMonsterOnBoard(_wolfMonster);
 				RemovePanel();
 			}
 			
-			if ( obj.tag == "rabbit" && objCountRabbit < 1)
+			if ( obj.tag == "rabbit" && objCountRabbit < 2)
 			{
 				GameObject _rabit = GameObject.Instantiate(obj, new Vector3(_currentStartPosition.x, _currentStartPosition.y, 0.0f),Quaternion.identity) as GameObject;
 				_rabit.collider.enabled = true;
 				animalPos.Remove(obj);
 				animalPos.Add(_rabit,_currentStartPosition);
 				objCountRabbit++;
-				_rabbitMonster = new Rabbit(xPos, yPos);
+				Rabbit _rabbitMonster = new Rabbit(xPos, yPos);
 				animals.Add(_rabbitMonster, _rabit);
 				_engine.PutMonsterOnBoard(_rabbitMonster);
 				RemovePanel();
 			}
 		
-			if ( obj.tag == "bear" && objCountBear < 1)
+			if ( obj.tag == "bear" && objCountBear < 2)
 			{
 				GameObject _bear = GameObject.Instantiate(obj, new Vector3(_currentStartPosition.x, _currentStartPosition.y, 0.0f),Quaternion.identity) as GameObject;
+				
+				print("TWORZE OBJEKT");
+				
 				_bear.collider.enabled = true;
 				animalPos.Remove(obj);
 				animalPos.Add(_bear,_currentStartPosition);
 				objCountBear++;
-				_bearMonster = new Bear(xPos, yPos);
+				Bear _bearMonster = new Bear(xPos, yPos);
 				animals.Add(_bearMonster, _bear);
 				_engine.PutMonsterOnBoard(_bearMonster);
 				RemovePanel();
@@ -176,15 +179,30 @@ public class GameMain : MonoBehaviour {
 	
 	private void GameStart()
 	{
+		Debug.Log ( _engine.Monsters.Count() + "monsters Przed TURA!!!!!");
 		_engine.Turn();
+		Debug.Log( animals.Count() + " animals");
+		Debug.Log ( _engine.Monsters.Count() + "monsters");
+		UpdateMosters();
 	
 	}
 	
 	
+	private void UpdateMosters()
+	{
+		foreach( var monster in _engine.Monsters)
+		{
+			int x = monster.Pos.X ;
+			int y = monster.Pos.Y;
+			iTween.MoveTo(animals[monster].gameObject,iTween.Hash("x", x, "y", y, "time", 2));
+			
+		}
+	}
+	
 	
 	private void RemovePanel()
 	{
-		if (objCountBear == 1 && objCountWolf == 1 && objCountRabbit == 1 && objCountCarrot == 1)
+		if (objCountBear == 2 && objCountWolf == 2 && objCountRabbit == 2 && objCountCarrot == 2)
 		{
 			Destroy(panel);
 			Invoke("GameStart", 2.0f);

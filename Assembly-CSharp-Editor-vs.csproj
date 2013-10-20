@@ -148,6 +148,7 @@
      <None Include="Assets\TK2DROOT\tk2d\Shaders\resources\BlendVertexColor.shader" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\LitCutoutVertexColor.shader" />
      <None Include="Assets\TK2DROOT\tk2d\Editor\EditorUtility.shader" />
+     <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
      <None Include="Assets\TK2DROOT\tk2d\Shaders\CutoutVertexColor.shader" />
      <None Include="Assets\TK2DROOT\tk2d_demo\demobmfont\test.fnt" />
      <None Include="Assets\TK2DROOT\tk2dUI_demo\Assets\Font\OldSansBlack\OldSansBlack.fnt" />
@@ -180,6 +181,10 @@
  <Reference Include="UnityEditor.Android.Extensions">
  <HintPath>C:\Program Files (x86)\Unity\Editor\Data\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-vs.csproj">
+      <Project>{3EA905A0-AC2C-6289-685B-5B83F634A7B3}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-vs.csproj">
