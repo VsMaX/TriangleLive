@@ -15,7 +15,7 @@ namespace TriangleLive
         protected static float ImigrationProbability;
         protected static float BornProbabillity;
         protected static int MaxPopulation;
-        protected const float SpriteRange = 0.2f;
+        protected const float SpriteRange = 1.0f;
         public int Life;
         protected int Energy;
 
@@ -26,12 +26,6 @@ namespace TriangleLive
         public Monster(Position pos)
         {
             this.Pos = pos;
-        }
-        public void Move()
-        {
-            var movingDirection = GetMoveDirection();
-            this.Pos.X += movingDirection.X;
-            this.Pos.Y += movingDirection.Y;
         }
 
         public Monster Move(List<Monster> neighbours)
@@ -116,11 +110,11 @@ namespace TriangleLive
         public Direction GetMoveDirection()
         {
             Random r = new Random();
-            float directionX = (float)(r.NextDouble() - 0.5f);
-            float directionY = (float)(r.NextDouble() - 0.5f);
+            float directionX = (float)r.NextDouble();
+            float directionY = (float)r.NextDouble();
             Direction d = new Direction();
-            d.X = directionX;
-            d.Y = directionY;
+            d.X = directionX + MoveSpeed;
+            d.Y = directionY + MoveSpeed;
             return d;
         }
     }
@@ -129,7 +123,7 @@ namespace TriangleLive
     {
         private static int LifeMax = 10;
         private static int EnergyMax =0;
-        private static float MoveSpeed = 0.2f;
+        private static int MoveSpeed =0;
         private static int GetOlder =0;
         private static int Perception =0;
         private static float ImigrationProbability =0.05f;
@@ -137,7 +131,7 @@ namespace TriangleLive
         private static int MaxPopulation= 10;
 
 
-        public Carrot(float x, float y):base(new Position(x,y))
+        public Carrot(int x, int y):base(new Position(x,y))
         {
         } 
         public override bool Eats(Monster monster)
@@ -159,7 +153,7 @@ namespace TriangleLive
     {
         private static int LifeMax = 50;
         private static int EnergyMax = 10;
-        private static float MoveSpeed = 0.4f;
+        private static int MoveSpeed = 2;
         private static int GetOlder = 1;
         private static int Perception = 15;
         private static float ImigrationProbability = 0.05f;
@@ -187,14 +181,14 @@ namespace TriangleLive
     {
         private static int LifeMax = 100;
         private static int EnergyMax = 30;
-        private static float MoveSpeed = 0.2f;
+        private static int MoveSpeed = 1;
         private static int GetOlder = 1;
         private static int Perception =20;
         private static float ImigrationProbability = 0.01f;
         private static float BornProbabillity = 0.1f;
         private static int MaxPopulation = 20;
 
-          public Bear(float x, float y):
+          public Bear(int x, int y):
            base(new Position(x,y)){} 
         public override bool Eats(Monster monster)
         {
@@ -213,14 +207,14 @@ namespace TriangleLive
     {
         private static int LifeMax = 20;
         private static int EnergyMax = 10;
-        private static float MoveSpeed =  0.2f;
+        private static int MoveSpeed =  0;
         private static int GetOlder = 0;
         private static int Perception = 0;
         private static float ImigrationProbability = 0.05f;
         private static float BornProbabillity = 0.3f;
         private static int MaxPopulation = 10;
 
-          public Rabbit(float x, float y):
+          public Rabbit(int x, int y):
            base(new Position(x,y)){
         } 
         public override bool Eats(Monster monster)

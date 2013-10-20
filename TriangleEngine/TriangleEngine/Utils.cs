@@ -13,8 +13,24 @@ namespace TriangleLive
 
     public class Direction
     {
-        public float X { get; set; }
-        public float Y { get; set; }
+        public float X
+        {
+            get { return X; }
+            set
+            {
+                X = value;
+                this.Normalise();
+            }
+        }
+        public float Y
+        {
+            get { return X; }
+            set
+            {
+                Y = value;
+                this.Normalise();
+            }
+        }
         private void Normalise()
         {
             float l2 = X * X + Y * Y;

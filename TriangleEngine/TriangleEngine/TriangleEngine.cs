@@ -19,6 +19,7 @@ namespace TriangleLive
         public void Turn()
         {
             MoveAndActOnAll();
+            KillAll();
         }
 
         private void KillAll()
@@ -40,21 +41,19 @@ namespace TriangleLive
         {
             foreach(var monster in Monsters)
             {
-                //switch(monster.status)
-                //{
-                    //case TurnAction.Move:
-                monster.Pos.X += 0.5f;
-                monster.Pos.Y += 0.5f;
-                        //var child = monster.Move();
-                        //if (child != null)
-                        //    Monsters.Add(child);
-                    //    break;
-                    //case TurnAction.Rest:
+                switch(monster.status)
+                {
+                    case TurnAction.Move:
+                        var child = monster.Move(GetNeighbours(monster));
+                        if (child != null)
+                            Monsters.Add(child);
+                        break;
+                    case TurnAction.Rest:
 
-                    //    break;
-                    //default:
-                    //    break;
-                //}
+                        break;
+                    default:
+                        break;
+                }
             }
             //List<Monster> toRemove = new List<Monster>();
             //foreach(Monster currentMonster in Monsters)
@@ -97,11 +96,11 @@ namespace TriangleLive
 
         public bool PutMonsterOnBoard(Monster monster)
         {
-            //foreach (Monster m in Monsters)
-            //{
-            //    if (monster.Pos == m.Pos)
-            //        return false;
-            //}
+            foreach (Monster m in Monsters)
+            {
+                if (monster.Pos == m.Pos)
+                    return false;
+            }
             Monsters.Add(monster);
             return true;
         }
