@@ -72,6 +72,7 @@ namespace TriangleLive
             Monster m = (Monster)Activator.CreateInstance(monster.GetType());
             var possibleMoves = PossibleMoves(monster);
             possibleMoves.AddRange(PossibleMoves(currentMonster));
+            Random r = new Random();
             int randomBreedField = r.Next(0, possibleMoves.Count);
             Position newBreedPos = possibleMoves[randomBreedField];
             m.Pos.X = newBreedPos.X;
