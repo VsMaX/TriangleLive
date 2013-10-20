@@ -19,7 +19,6 @@ namespace TriangleLive
         public void Turn()
         {
             MoveAndActOnAll();
-            KillAll();
         }
 
         private void KillAll()
