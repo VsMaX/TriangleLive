@@ -28,11 +28,11 @@ namespace TriangleLive
             this.Pos = pos;
         }
 
-        public Direction Move()
+        public Position Move()
         {
             Random r = new Random();
-            int moveTo = r.Next(0, 3);
-            return (Direction)moveTo;
+            int moveTo =  r.NextDouble() - ;
+
         }
 
         public Direction Move(int val)
@@ -50,9 +50,9 @@ namespace TriangleLive
             return false;
         }
 
-        protected abstract bool isRested();
+        protected abstract bool IsRested();
 
-        public bool isMoving()
+        public bool IsMoving()
         {
             if (this is Carrot)
                 return false;

@@ -31,7 +31,6 @@ namespace TriangleLive
                 this.normalise();
             }
         }
-
         private void normalise()
         {
             float l2 = X * X + Y * Y;
@@ -58,27 +57,8 @@ namespace TriangleLive
         }
         public Position(Direction d, Position oldPosition)
         {
-            X = oldPosition.X;
-            Y = oldPosition.Y;
-            switch(d)
-            {
-                case Direction.Up:
-                    if (oldPosition.Y < 9)
-                        Y++;
-                    break;
-                case Direction.Right:
-                    if (oldPosition.X < 9)
-                        X++;
-                    break;
-                case Direction.Down:
-                    if (oldPosition.Y > 0)
-                        Y--;
-                    break;
-                case Direction.Left:
-                    if (oldPosition.X > 0)
-                        X--;
-                    break;
-            }
+            X = (float) Math.Min(Math.Max(oldPosition.X + d.X, -14), 14);
+            Y = (float) Math.Min(Math.Max(oldPosition.Y + d.Y, -14), 14);
         }
         public float X { get; set; }
         public float Y { get; set; }
