@@ -8,7 +8,7 @@ namespace TriangleLive
     public enum TurnAction
     {
         Move,
-        Grow,
+        Rest,
     }
 
     public enum Direction

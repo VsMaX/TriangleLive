@@ -17,7 +17,7 @@ namespace TriangleLive
         protected static float BornProbabillity;
         protected static int MaxPopulation;
 
-        protected int Life;
+        public int Life;
         protected int Energy;
 
         public TurnAction status;
@@ -32,6 +32,8 @@ namespace TriangleLive
         public Monster(Position pos)
         {
             this.Pos = pos;
+            this.Life = this.LifeMax;
+            this.Energy = this.EnergyMax;
         }
 
         public Direction Move()

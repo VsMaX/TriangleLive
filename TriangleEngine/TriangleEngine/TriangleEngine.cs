@@ -38,7 +38,7 @@ namespace TriangleLive
             {
                 if (toRemove.Contains(currentMonster))
                     continue;
-                if (currentMonster.status == TurnAction.Grow)
+                if (currentMonster.status == TurnAction.Rest)
                     return;
                 Direction direction = currentMonster.Move();
                 Position newPosition = new Position(direction, currentMonster.Pos);
@@ -58,7 +58,7 @@ namespace TriangleLive
                             if (currentMonster.GetType() == monster.GetType())
                                 Breed(currentMonster, monster);
                         }
-                    }
+                    } 
                 }
             }
             foreach(Monster monsterToRemove in toRemove)
