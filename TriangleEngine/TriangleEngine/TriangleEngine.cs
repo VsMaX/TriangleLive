@@ -43,7 +43,8 @@ namespace TriangleLive
                 //switch(monster.status)
                 //{
                     //case TurnAction.Move:
-                        monster.Move();
+                monster.Pos.X += 0.5f;
+                monster.Pos.Y += 0.5f;
                         //var child = monster.Move();
                         //if (child != null)
                         //    Monsters.Add(child);
