@@ -8,7 +8,7 @@ namespace TriangleLive
     public class TriangleEngine
     {
         public List<Monster> Monsters;
-        public const int BoardSize = 10;
+        
         public event MonsterEatenEventHandler MonsterEaten;
         public event MonsterBornEventHandler MonsterBorn;
         public TriangleEngine()
@@ -58,7 +58,7 @@ namespace TriangleLive
                             if (currentMonster.GetType() == monster.GetType())
                                 Breed(currentMonster, monster);
                         }
-                    } 
+                    }
                 }
             }
             foreach(Monster monsterToRemove in toRemove)
@@ -80,27 +80,9 @@ namespace TriangleLive
             Monsters.Add(m);
         }
 
-        private List<Position> PossibleMoves(Monster monster)
+        private bool CanMove(Position position, Position position)
         {
-            List<Position> possibleMoves = new List<Position>();
-            for(int i = 0; i < 4; i++)
-            {
-                Direction d = (Direction) i;
-                Position pos = new Position(d, monster.Pos);
-                if (CanMove(pos))
-                    possibleMoves.Add(pos);
-            }
-            return possibleMoves;
-        }
-
-        private bool CanMove(Position position)
-        {
-            foreach (var m in Monsters)
-            {
-                if (m.Pos == position)
-                    return false;
-            }
-            return true;
+            
         }
 
         public bool PutMonsterOnBoard(Monster monster)

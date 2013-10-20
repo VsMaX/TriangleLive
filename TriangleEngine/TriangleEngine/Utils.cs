@@ -70,5 +70,15 @@ namespace TriangleLive
         {
             return !(pos1.X == pos2.X && pos1.Y == pos2.Y);
         }
+
+        public static float Distance(Position pos1, Position pos2)
+        {
+            return (float) Math.Sqrt(Math.Pow(pos1.X - pos2.X, 2) + Math.Pow(pos1.Y - pos2.Y, 2));
+        }
+
+        public static bool IsInCloseRange(Position pos1, Position pos2)
+        {
+            return Distance(pos1, pos2) < 1;
+        }
     }
 }
