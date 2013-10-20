@@ -69,7 +69,28 @@ namespace TriangleLive
 
         private void Breed(Monster currentMonster, Monster monster)
         {
-            throw new NotImplementedException();
+            Monster m = (Monster)Activator.CreateInstance(monster.GetType());
+            var possibleMoves = PossibleMoves(monster);
+            possibleMoves.AddRange(PossibleMoves(currentMonster));
+            Random r = new Random();
+            int randomBreedField = r.Next(0, possibleMoves.Count);
+            Position newBreedPos = possibleMoves[randomBreedField];
+            m.Pos.X = newBreedPos.X;
+            m.Pos.Y = newBreedPos.Y;
+            Monsters.Add(m);
+        }
+
+        private List<Position> PossibleMoves(Monster monster)
+        {
+            List<Position> possibleMoves = new List<Position>();
+            for(int i = 0; i < 4; i++)
+            {
+                Direction d = (Direction) i;
+                Position pos = new Position(d, monster.Pos);
+                if (CanMove(pos))
+                    possibleMoves.Add(pos);
+            }
+            return possibleMoves;
         }
 
         private bool CanMove(Position position)
@@ -80,11 +101,6 @@ namespace TriangleLive
                     return false;
             }
             return true;
-        }
-
-        private Monster LeftMonster(int x, int y)
-        {
-            throw new NotImplementedException();
         }
 
         public bool PutMonsterOnBoard(Monster monster)
