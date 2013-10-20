@@ -15,7 +15,7 @@ namespace TriangleLive
         protected static float ImigrationProbability;
         protected static float BornProbabillity;
         protected static int MaxPopulation;
-        protected const float SpriteRange = 1.0f;
+        protected const float SpriteRange = 0.2f;
         public int Life;
         protected int Energy;
 
@@ -123,7 +123,7 @@ namespace TriangleLive
     {
         private static int LifeMax = 10;
         private static int EnergyMax =0;
-        private static int MoveSpeed =0;
+        private static float MoveSpeed = 0.2f;
         private static int GetOlder =0;
         private static int Perception =0;
         private static float ImigrationProbability =0.05f;
@@ -153,7 +153,7 @@ namespace TriangleLive
     {
         private static int LifeMax = 50;
         private static int EnergyMax = 10;
-        private static int MoveSpeed = 2;
+        private static float MoveSpeed = 0.4f;
         private static int GetOlder = 1;
         private static int Perception = 15;
         private static float ImigrationProbability = 0.05f;
@@ -181,7 +181,7 @@ namespace TriangleLive
     {
         private static int LifeMax = 100;
         private static int EnergyMax = 30;
-        private static int MoveSpeed = 1;
+        private static float MoveSpeed = 0.2f;
         private static int GetOlder = 1;
         private static int Perception =20;
         private static float ImigrationProbability = 0.01f;
@@ -207,7 +207,7 @@ namespace TriangleLive
     {
         private static int LifeMax = 20;
         private static int EnergyMax = 10;
-        private static int MoveSpeed =  0;
+        private static float MoveSpeed =  0.2f;
         private static int GetOlder = 0;
         private static int Perception = 0;
         private static float ImigrationProbability = 0.05f;

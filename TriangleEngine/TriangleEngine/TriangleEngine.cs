@@ -96,11 +96,11 @@ namespace TriangleLive
 
         public bool PutMonsterOnBoard(Monster monster)
         {
-            foreach (Monster m in Monsters)
-            {
-                if (monster.Pos == m.Pos)
-                    return false;
-            }
+            //foreach (Monster m in Monsters)
+            //{
+            //    if (monster.Pos == m.Pos)
+            //        return false;
+            //}
             Monsters.Add(monster);
             return true;
         }
