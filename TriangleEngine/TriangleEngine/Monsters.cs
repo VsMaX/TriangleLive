@@ -15,7 +15,7 @@ namespace TriangleLive
         protected static float ImigrationProbability;
         protected static float BornProbabillity;
         protected static int MaxPopulation;
-        protected const float SpriteRange = 0.5f;
+        protected const float SpriteRange = 1.0f;
         public int Life;
         protected int Energy;
 
@@ -31,6 +31,8 @@ namespace TriangleLive
         public Monster Move(List<Monster> neighbours)
         {
             var movingDirection = GetMoveDirection();
+            this.Pos.X += movingDirection.X;
+            this.Pos.Y += movingDirection.Y;
             foreach(var neighbour in neighbours)
             {
                 if(IsNear(neighbour))
