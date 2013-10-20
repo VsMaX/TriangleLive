@@ -7,7 +7,6 @@ namespace TriangleLive
 {
     public abstract class Monster
     {
-        public int Size { get; set; }
         protected static int LifeMax;
         protected static int EnergyMax;
         protected static int MoveSpeed;
@@ -23,17 +22,10 @@ namespace TriangleLive
         public TurnAction status;
         
         public Position Pos { get; set; }
-         
-        public Monster()
-        {
-            Size = 0;
-        }
 
         public Monster(Position pos)
         {
             this.Pos = pos;
-            this.Life = this.LifeMax;
-            this.Energy = this.EnergyMax;
         }
 
         public Direction Move()
@@ -47,11 +39,6 @@ namespace TriangleLive
         {
             return (Direction)val;
         }
-        public int Grow()
-        {
-            return ++this.Size;
-        }
-
         public abstract bool Eats(Monster monster);
 
         public bool IsNear(Monster monster)
@@ -62,6 +49,25 @@ namespace TriangleLive
                 return true;
             return false;
         }
+
+        protected abstract bool isRested();
+
+        public bool isMoving()
+        {
+            if (this is Carrot)
+                return false;
+            if (this.Energy == 0 || (this.status == TurnAction.Rest && !this.isRested()))
+            {
+                this.status = TurnAction.Rest;
+                return false;
+            }
+            this.status = TurnAction.Move;
+            return true;
+        }
+
+        public abstract Direction GetMoveDirection(List<Monster> Neighbourhood);
+        
+
     }
 
     public class Carrot : Monster
@@ -85,6 +91,17 @@ namespace TriangleLive
                 return true;
             return false;
         }
+
+        public override Direction GetMoveDirection(List<Monster> Neighbourhood)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool isRested()
+        {
+            return (this.Energy < Carrot.EnergyMax) ? true : false;
+        }
+
     }
 
     public class Wolf : Monster
@@ -108,6 +125,16 @@ namespace TriangleLive
                 return true;
             return false;
         }
+
+        public override Direction GetMoveDirection(List<Monster> Neighbourhood)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool isRested()
+        {
+            return (this.Energy < Wolf.EnergyMax) ? true : false;
+        }
     }
 
     public class Bear : Monster
@@ -128,6 +155,15 @@ namespace TriangleLive
             if (monster is Wolf)
                 return true;
             return false;
+        }
+        public override Direction GetMoveDirection(List<Monster> Neighbourhood)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool isRested()
+        {
+            return (this.Energy < Bear.EnergyMax) ? true : false;
         }
     }
 
@@ -150,6 +186,16 @@ namespace TriangleLive
             if (monster is Carrot)
                 return true;
             return false;
+        }
+
+        public override Direction GetMoveDirection(List<Monster> Neighbourhood)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool isRested()
+        {
+            return (this.Energy < Rabbit.EnergyMax) ? true : false;
         }
     }
 
