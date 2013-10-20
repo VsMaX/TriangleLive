@@ -27,6 +27,12 @@ namespace TriangleLive
         {
             this.Pos = pos;
         }
+        public void Move()
+        {
+            var movingDirection = GetMoveDirection();
+            this.Pos.X += movingDirection.X;
+            this.Pos.Y += movingDirection.Y;
+        }
 
         public Monster Move(List<Monster> neighbours)
         {
@@ -113,8 +119,8 @@ namespace TriangleLive
             float directionX = (float)(r.NextDouble() - 0.5f);
             float directionY = (float)(r.NextDouble() - 0.5f);
             Direction d = new Direction();
-            d.X = directionX + MoveSpeed;
-            d.Y = directionY + MoveSpeed;
+            d.X = directionX;
+            d.Y = directionY;
             return d;
         }
     }
@@ -131,7 +137,7 @@ namespace TriangleLive
         private static int MaxPopulation= 10;
 
 
-        public Carrot(int x, int y):base(new Position(x,y))
+        public Carrot(float x, float y):base(new Position(x,y))
         {
         } 
         public override bool Eats(Monster monster)
@@ -188,7 +194,7 @@ namespace TriangleLive
         private static float BornProbabillity = 0.1f;
         private static int MaxPopulation = 20;
 
-          public Bear(int x, int y):
+          public Bear(float x, float y):
            base(new Position(x,y)){} 
         public override bool Eats(Monster monster)
         {
@@ -214,7 +220,7 @@ namespace TriangleLive
         private static float BornProbabillity = 0.3f;
         private static int MaxPopulation = 10;
 
-          public Rabbit(int x, int y):
+          public Rabbit(float x, float y):
            base(new Position(x,y)){
         } 
         public override bool Eats(Monster monster)

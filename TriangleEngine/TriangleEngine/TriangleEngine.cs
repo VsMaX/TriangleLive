@@ -44,9 +44,10 @@ namespace TriangleLive
                 switch(monster.status)
                 {
                     case TurnAction.Move:
-                        var child = monster.Move(GetNeighbours(monster));
-                        if (child != null)
-                            Monsters.Add(child);
+                        monster.Move();
+                        //var child = monster.Move();
+                        //if (child != null)
+                        //    Monsters.Add(child);
                         break;
                     case TurnAction.Rest:
 
