@@ -11,17 +11,56 @@ namespace TriangleLive
         Rest,
     }
 
-    public enum Direction
+    //public enum Direction
+    //{
+    //    Up,
+    //    Left,
+    //    Down,
+    //    Right
+    //}
+
+    public class Direction
     {
-        Up,
-        Left,
-        Down,
-        Right
+        public float X
+        {
+            get { return X; }
+            set
+            {
+                X = value;
+                this.normalise();
+            }
+        }
+        public float Y
+        {
+            get { return X; }
+            set
+            {
+                Y = value;
+                this.normalise();
+            }
+        }
+
+
+
+        private void normalise()
+        {
+            float l2 = X * X + Y * Y;
+            float len = (float)Math.Sqrt(l2);
+            X = X / len;
+            Y = Y / len;
+
+        }
+
+      
+
     }
+
+
+
 
     public class Position
     {
-        public Position(int x, int y)
+        public Position(float x, float y)
         {
             X = x;
             Y = y;
@@ -58,8 +97,8 @@ namespace TriangleLive
                     break;
             }
         }
-        public int X { get; set; }
-        public int Y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
 
         public static bool operator==(Position pos1, Position pos2)
         {
@@ -70,5 +109,12 @@ namespace TriangleLive
         {
             return !(pos1.X == pos2.X && pos1.Y == pos2.Y);
         }
+
+        public float Distance( Position pos2)
+        {
+            return (float)Math.Sqrt(X*pos2.X + Y*pos2.Y); 
+        }
     }
+
+
 }
