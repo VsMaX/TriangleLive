@@ -15,39 +15,79 @@ namespace TriangleLive
         protected static float ImigrationProbability;
         protected static float BornProbabillity;
         protected static int MaxPopulation;
-
+        protected const float SpriteRange = 0.5f;
         public int Life;
         protected int Energy;
 
         public TurnAction status;
         
         public Position Pos { get; set; }
-
+        public Position PreviousPos { get; set; }
         public Monster(Position pos)
         {
             this.Pos = pos;
         }
 
-        public Position Move()
+        public Monster Move(List<Monster> neighbours)
         {
-            Random r = new Random();
-            int moveTo =  r.NextDouble() - ;
-
-        }
-
-        public Direction Move(int val)
-        {
-            return (Direction)val;
+            var movingDirection = GetMoveDirection();
+            foreach(var neighbour in neighbours)
+            {
+                if(IsNear(neighbour))
+                {
+                    if(Eats(neighbour))
+                        Eat(neighbour);
+                    if (IsTheSameAs(neighbour))
+                        return Breed(neighbour, this);
+                }
+            }
+            return null;
         }
         public abstract bool Eats(Monster monster);
 
-        public bool IsNear(Monster monster)
+
+        public Monster Breed(Monster mother, Monster father)
         {
-            if (Math.Abs(this.Pos.X - monster.Pos.X) == 1)
-                return true;
-            if (Math.Abs(this.Pos.X - monster.Pos.X) == 1)
+            Position pos = new Position(mother.Pos.X, mother.Pos.Y + SpriteRange);
+            Monster monster;
+            if(mother is Wolf)
+            {
+                monster = new Wolf(mother.Pos.X, mother.Pos.Y + SpriteRange);
+            }
+            if(mother is Bear)
+            {
+                monster = new Wolf(mother.Pos.X, mother.Pos.Y + SpriteRange);
+            }
+            if(mother is Rabbit)
+            {
+                monster = new Wolf(mother.Pos.X, mother.Pos.Y + SpriteRange);
+            }
+            return null;
+        }
+        public bool IsTheSameAs(Monster monster)
+        {
+            if(monster.GetType() == this.GetType())
                 return true;
             return false;
+        }
+        public bool IsNear(Monster monster)
+        {
+            return Position.IsInCloseRange(monster.Pos, this.Pos);
+        }
+
+        public bool IsSeen(Monster monster)
+        {
+            return Position.IsInRange(monster.Pos, this.Pos, Perception);
+        }
+
+        public void Eat(Monster monster)
+        {
+            monster.Kill();
+        }
+
+        public void Kill()
+        {
+            this.Life = -1;
         }
 
         protected abstract bool IsRested();
@@ -56,7 +96,7 @@ namespace TriangleLive
         {
             if (this is Carrot)
                 return false;
-            if (this.Energy == 0 || (this.status == TurnAction.Rest && !this.isRested()))
+            if (this.Energy == 0 || (this.status == TurnAction.Rest && !this.IsRested()))
             {
                 this.status = TurnAction.Rest;
                 return false;
@@ -65,9 +105,16 @@ namespace TriangleLive
             return true;
         }
 
-        public abstract Direction GetMoveDirection(List<Monster> Neighbourhood);
-        
-
+        public Direction GetMoveDirection()
+        {
+            Random r = new Random();
+            float directionX = (float)r.NextDouble();
+            float directionY = (float)r.NextDouble();
+            Direction d = new Direction();
+            d.X = directionX + MoveSpeed;
+            d.Y = directionY + MoveSpeed;
+            return d;
+        }
     }
 
     public class Carrot : Monster
@@ -83,7 +130,7 @@ namespace TriangleLive
 
 
         public Carrot(int x, int y):base(new Position(x,y))
-       {
+        {
         } 
         public override bool Eats(Monster monster)
         {
@@ -92,12 +139,8 @@ namespace TriangleLive
             return false;
         }
 
-        public override Direction GetMoveDirection(List<Monster> Neighbourhood)
-        {
-            throw new NotImplementedException();
-        }
 
-        protected override bool isRested()
+        protected override bool IsRested()
         {
             return (this.Energy < Carrot.EnergyMax) ? true : false;
         }
@@ -115,7 +158,7 @@ namespace TriangleLive
         private static float BornProbabillity = 0.2f;
         private static int MaxPopulation = 30;
 
-          public Wolf(int x, int y): base(new Position(x,y))
+          public Wolf(float x, float y): base(new Position(x,y))
         {
           
         } 
@@ -126,12 +169,7 @@ namespace TriangleLive
             return false;
         }
 
-        public override Direction GetMoveDirection(List<Monster> Neighbourhood)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override bool isRested()
+        protected override bool IsRested()
         {
             return (this.Energy < Wolf.EnergyMax) ? true : false;
         }
@@ -156,12 +194,8 @@ namespace TriangleLive
                 return true;
             return false;
         }
-        public override Direction GetMoveDirection(List<Monster> Neighbourhood)
-        {
-            throw new NotImplementedException();
-        }
 
-        protected override bool isRested()
+        protected override bool IsRested()
         {
             return (this.Energy < Bear.EnergyMax) ? true : false;
         }
@@ -188,12 +222,7 @@ namespace TriangleLive
             return false;
         }
 
-        public override Direction GetMoveDirection(List<Monster> Neighbourhood)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override bool isRested()
+        protected override bool IsRested()
         {
             return (this.Energy < Rabbit.EnergyMax) ? true : false;
         }

@@ -19,7 +19,7 @@ namespace TriangleLive
             set
             {
                 X = value;
-                this.normalise();
+                this.Normalise();
             }
         }
         public float Y
@@ -28,10 +28,10 @@ namespace TriangleLive
             set
             {
                 Y = value;
-                this.normalise();
+                this.Normalise();
             }
         }
-        private void normalise()
+        private void Normalise()
         {
             float l2 = X * X + Y * Y;
             float len = (float)Math.Sqrt(l2);
@@ -78,6 +78,10 @@ namespace TriangleLive
         public static bool IsInCloseRange(Position pos1, Position pos2)
         {
             return Distance(pos1, pos2) < 1;
+        }
+        public static bool IsInRange(Position pos1, Position pos2, float range)
+        {
+            return Distance(pos1, pos2) < range;
         }
     }
 }

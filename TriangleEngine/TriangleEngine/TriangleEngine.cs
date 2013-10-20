@@ -33,56 +33,59 @@ namespace TriangleLive
 
         private void MoveAndActOnAll()
         {
-            List<Monster> toRemove = new List<Monster>();
-            foreach(Monster currentMonster in Monsters)
+            foreach(var monster in Monsters)
             {
-                if (toRemove.Contains(currentMonster))
-                    continue;
-                if (currentMonster.status == TurnAction.Rest)
-                    return;
-                Direction direction = currentMonster.Move();
-                Position newPosition = new Position(direction, currentMonster.Pos);
-                if (CanMove(newPosition))
+                switch(monster.status)
                 {
-                    currentMonster.Pos = newPosition;
-                    foreach (Monster monster in Monsters)
-                    {
-                        if (monster == currentMonster)
-                            continue;
-                        if (currentMonster.IsNear(monster))
-                        {
-                            if (currentMonster.Eats(monster))
-                            {
-                                toRemove.Add(monster);
-                            }
-                            if (currentMonster.GetType() == monster.GetType())
-                                Breed(currentMonster, monster);
-                        }
-                    }
+                    case TurnAction.Move:
+                        var child = monster.Move(GetNeighbours(monster));
+                        if (child != null)
+                            Monsters.Add(child);
+                        break;
+                    case TurnAction.Rest:
+
+                        break;
+                    default:
+                        break;
                 }
             }
-            foreach(Monster monsterToRemove in toRemove)
-            {
-                Monsters.Remove(monsterToRemove);
-            }
+            //List<Monster> toRemove = new List<Monster>();
+            //foreach(Monster currentMonster in Monsters)
+            //{
+            //    if (toRemove.Contains(currentMonster))
+            //        continue;
+            //    if (currentMonster.status == TurnAction.Rest)
+            //        return;
+            //    Direction direction = currentMonster.Move();
+            //    Position newPosition = new Position(direction, currentMonster.Pos);
+            //    if (CanMove(newPosition))
+            //    {
+            //        currentMonster.Pos = newPosition;
+            //        foreach (Monster monster in Monsters)
+            //        {
+            //            if (monster == currentMonster)
+            //                continue;
+            //            if (currentMonster.IsNear(monster))
+            //            {
+            //                if (currentMonster.Eats(monster))
+            //                {
+            //                    toRemove.Add(monster);
+            //                }
+            //                if (currentMonster.GetType() == monster.GetType())
+            //                    Breed(currentMonster, monster);
+            //            }
+            //        }
+            //    }
+            //}
+            //foreach(Monster monsterToRemove in toRemove)
+            //{
+            //    Monsters.Remove(monsterToRemove);
+            //}
         }
 
-        private void Breed(Monster currentMonster, Monster monster)
+        public List<Monster> GetNeighbours(Monster monster)
         {
-            Monster m = (Monster)Activator.CreateInstance(monster.GetType());
-            var possibleMoves = PossibleMoves(monster);
-            possibleMoves.AddRange(PossibleMoves(currentMonster));
-            Random r = new Random();
-            int randomBreedField = r.Next(0, possibleMoves.Count);
-            Position newBreedPos = possibleMoves[randomBreedField];
-            m.Pos.X = newBreedPos.X;
-            m.Pos.Y = newBreedPos.Y;
-            Monsters.Add(m);
-        }
-
-        private bool CanMove(Position position, Position position)
-        {
-            
+            return Monsters.FindAll(x => monster.IsNear(x));
         }
 
         public bool PutMonsterOnBoard(Monster monster)
