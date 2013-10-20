@@ -41,20 +41,20 @@ namespace TriangleLive
         {
             foreach(var monster in Monsters)
             {
-                switch(monster.status)
-                {
-                    case TurnAction.Move:
+                //switch(monster.status)
+                //{
+                    //case TurnAction.Move:
                         monster.Move();
                         //var child = monster.Move();
                         //if (child != null)
                         //    Monsters.Add(child);
-                        break;
-                    case TurnAction.Rest:
+                    //    break;
+                    //case TurnAction.Rest:
 
-                        break;
-                    default:
-                        break;
-                }
+                    //    break;
+                    //default:
+                    //    break;
+                //}
             }
             //List<Monster> toRemove = new List<Monster>();
             //foreach(Monster currentMonster in Monsters)
