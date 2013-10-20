@@ -11,14 +11,6 @@ namespace TriangleLive
         Rest,
     }
 
-    //public enum Direction
-    //{
-    //    Up,
-    //    Left,
-    //    Down,
-    //    Right
-    //}
-
     public class Direction
     {
         public float X
@@ -40,23 +32,14 @@ namespace TriangleLive
             }
         }
 
-
-
         private void normalise()
         {
             float l2 = X * X + Y * Y;
             float len = (float)Math.Sqrt(l2);
             X = X / len;
             Y = Y / len;
-
         }
-
-      
-
     }
-
-
-
 
     public class Position
     {
@@ -104,26 +87,17 @@ namespace TriangleLive
         {
             return pos1.X == pos2.X && pos1.Y == pos2.Y;
         }
-
         public static bool operator!=(Position pos1, Position pos2)
         {
             return !(pos1.X == pos2.X && pos1.Y == pos2.Y);
         }
-
-        public static bool operator==(Position pos1, Position pos2)
-        {
-            return pos1.X == pos2.X && pos1.Y == pos2.Y;
-        }
         public static float Distance(Position pos1, Position pos2)
         {
             return (float) Math.Sqrt(Math.Pow(pos1.X - pos2.X, 2) + Math.Pow(pos1.Y - pos2.Y, 2));
-	}
+	    }
         public static bool IsInCloseRange(Position pos1, Position pos2)
         {
             return Distance(pos1, pos2) < 1;
         }
-        
     }
-
-
 }
