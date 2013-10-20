@@ -110,8 +110,8 @@ namespace TriangleLive
         public Direction GetMoveDirection()
         {
             Random r = new Random();
-            float directionX = (float)r.NextDouble();
-            float directionY = (float)r.NextDouble();
+            float directionX = (float)(r.NextDouble() - 0.5f);
+            float directionY = (float)(r.NextDouble() - 0.5f);
             Direction d = new Direction();
             d.X = directionX + MoveSpeed;
             d.Y = directionY + MoveSpeed;
