@@ -69,8 +69,6 @@ namespace TriangleLive
 
         private void Breed(Monster currentMonster, Monster monster)
         {
-            Random r = new Random();
-            int v = r.Next(0, 1);
             Monster m = (Monster)Activator.CreateInstance(monster.GetType());
             var possibleMoves = PossibleMoves(monster);
             possibleMoves.AddRange(PossibleMoves(currentMonster));
